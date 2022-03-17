@@ -42,11 +42,18 @@ def home():
 def not_found(error):
     return "404", 404
 
+from apps.user.controllers import user_bp as user_module
+app.register_blueprint(user_module) 
+
+from apps.admin.controllers import admin_bp as admin_module
+app.register_blueprint(admin_module)  
+
 from apps.perumahan.controllers import perumahan_bp as perumahan_module
 app.register_blueprint(perumahan_module)    
 
-from apps.user.controllers import user_bp as user_module
-app.register_blueprint(user_module)  
+from apps.premis.controllers import premis_bp as premis_module
+app.register_blueprint(premis_module)   
+ 
 
 db.create_all()
 
