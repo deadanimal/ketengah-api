@@ -2,14 +2,14 @@
 from flask import Blueprint, request, render_template, jsonify, flash, abort
 from sqlalchemy import desc
 import time
-from apps.perumahan.models import Perumahan
+from apps.user.models import User
 from apps import db
 
-perumahan_bp = Blueprint('perumahan', __name__, url_prefix='/perumahan')
+user_bp = Blueprint('user', __name__, url_prefix='/user')
 
 
-@perumahan_bp.route('/', methods=['GET', 'POST', 'PUT'])
-def perumahan():
+@user_bp.route('/', methods=['GET', 'POST', 'PUT'])
+def user():
     data = {}
     if request.method == 'POST':
         pass

@@ -45,6 +45,8 @@ def not_found(error):
 from apps.perumahan.controllers import perumahan_bp as perumahan_module
 app.register_blueprint(perumahan_module)    
 
+from apps.user.controllers import user_bp as user_module
+app.register_blueprint(user_module)  
 
 db.create_all()
 
