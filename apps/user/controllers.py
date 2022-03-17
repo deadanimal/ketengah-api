@@ -42,7 +42,7 @@ def senarai_user():
             'password': user.password
         }
         list_.append(satu_user)
-    return jsonify(data)
+    return jsonify(list_)
 
 @user_bp.route('/<int:id>', methods=['GET', 'PUT'])
 def satu_user(id):
