@@ -35,7 +35,6 @@ def senarai_user():
 
 @user_bp.route('/<int:id>', methods=['GET', 'PUT'])
 def satu_user(id):
-    data = {}
     if request.method == 'PUT':
         user = User.query.get(id)
         request_data = request.get_json()
@@ -50,5 +49,5 @@ def satu_user(id):
         user.password = request_data['password']  
         db.session.commit()                         
     else:
-        user = User.query.get(id)
+        user = User.query.filter_by(id=id).first()
         return jsonify(user)      

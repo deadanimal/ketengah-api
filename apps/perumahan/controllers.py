@@ -45,9 +45,25 @@ def senarai_perumahan():
 @perumahan_bp.route('/<int:id>', methods=['GET', 'PUT'])
 def satu_perumahan(id):
     
-    if request.method == 'PUT':
-        pass
-
-    else:
+    if request.method == 'PUT': 
         perumahan = Perumahan.query.get(id)
+        request_data = request.get_json()
+        perumahan.user_id = request_data['user_id']
+        perumahan.nama = request_data['nama']
+        perumahan.no_kad_pengenalan = request_data['no_kad_pengenalan']
+        perumahan.no_rumah = request_data['no_rumah']
+        perumahan.taman = request_data['taman']
+        perumahan.kod_kategori = request_data['kod_kategori']
+        perumahan.kategori = request_data['kategori']
+        perumahan.kadar_sewa = request_data['kadar_sewa']
+        perumahan.jenis_rumah = request_data['jenis_rumah']
+        perumahan.jumah_telah_bayar = request_data['jumah_telah_bayar']
+        perumahan.jumlah_pinjaman = request_data['jumlah_pinjaman']
+        perumahan.tarikh_mula_perjanjian = request_data['tarikh_mula_perjanjian']
+        perumahan.tarikh_tamat_perjanjian = request_data['tarikh_tamat_perjanjian']
+        perumahan.jumlah_tunggakan = request_data['jumlah_tunggakan']
+        perumahan.jumlah_baki = request_data['jumlah_baki']
+        perumahan.no_akaun_rumah = request_data['no_akaun_rumah']
+    else:
+        perumahan = Perumahan.query.filter_by(id=id).first()
         return jsonify(perumahan)    
