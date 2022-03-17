@@ -32,39 +32,39 @@ def senarai_perumahan():
             kategori, kadar_sewa, jenis_rumah, jumah_telah_bayar, jumlah_pinjaman, tarikh_mula_perjanjian, 
             tarikh_tamat_perjanjian, jumlah_tunggakan, jumlah_baki, no_akaun_rumah)
         db.session.add(perumahan)
-        db.session.commit()
-        return jsonify(perumahan)    
-    else:
-        list_ = []
-        senarai_perumahan = Perumahan.query.all()
-        for perumahan in senarai_perumahan:
-            satu_perumahan = {
-                "user_id": perumahan.user_id,
-                "nama": perumahan.nama,
-                "no_kad_pengenalan": perumahan.no_kad_pengenalan,
-                "no_rumah": perumahan.no_rumah,
-                "taman": perumahan.taman,
-                "kod_kategori": perumahan.kod_kategori,
-                "kategori": perumahan.kategori,
-                "kadar_sewa": perumahan.kadar_sewa,
-                "jenis_rumah": perumahan.jenis_rumah,
-                "jumah_telah_bayar": perumahan.jumah_telah_bayar,
-                "jumlah_pinjaman": perumahan.jumlah_pinjaman,
-                "tarikh_mula_perjanjian": perumahan.tarikh_mula_perjanjian,
-                "tarikh_tamat_perjanjian": perumahan.tarikh_tamat_perjanjian,
-                "jumlah_tunggakan": perumahan.jumlah_tunggakan,
-                "jumlah_baki": perumahan.jumlah_baki,
-                "no_akaun_rumah": perumahan.no_akaun_rumah,
-            }            
-            list_.append(satu_perumahan)
-        return jsonify(list_) 
+        db.session.commit()  
+
+    list_ = []
+    senarai_perumahan = Perumahan.query.all()
+    for perumahan in senarai_perumahan:
+        satu_perumahan = {
+            "user_id": perumahan.user_id,
+            "nama": perumahan.nama,
+            "no_kad_pengenalan": perumahan.no_kad_pengenalan,
+            "no_rumah": perumahan.no_rumah,
+            "taman": perumahan.taman,
+            "kod_kategori": perumahan.kod_kategori,
+            "kategori": perumahan.kategori,
+            "kadar_sewa": perumahan.kadar_sewa,
+            "jenis_rumah": perumahan.jenis_rumah,
+            "jumah_telah_bayar": perumahan.jumah_telah_bayar,
+            "jumlah_pinjaman": perumahan.jumlah_pinjaman,
+            "tarikh_mula_perjanjian": perumahan.tarikh_mula_perjanjian,
+            "tarikh_tamat_perjanjian": perumahan.tarikh_tamat_perjanjian,
+            "jumlah_tunggakan": perumahan.jumlah_tunggakan,
+            "jumlah_baki": perumahan.jumlah_baki,
+            "no_akaun_rumah": perumahan.no_akaun_rumah,
+        }           
+        list_.append(satu_perumahan)
+    return jsonify(list_) 
 
 
 @perumahan_bp.route('/<int:id>', methods=['GET', 'PUT'])
 def satu_perumahan(id):
     
+    perumahan = Perumahan.query.get(id)
+
     if request.method == 'PUT': 
-        perumahan = Perumahan.query.get(id)
         request_data = request.get_json()
         perumahan.user_id = request_data['user_id']
         perumahan.nama = request_data['nama']
@@ -82,6 +82,5 @@ def satu_perumahan(id):
         perumahan.jumlah_tunggakan = request_data['jumlah_tunggakan']
         perumahan.jumlah_baki = request_data['jumlah_baki']
         perumahan.no_akaun_rumah = request_data['no_akaun_rumah']
-    else:
-        perumahan = Perumahan.query.filter_by(id=id).first()
-        return jsonify(perumahan)    
+
+    return jsonify(perumahan)    

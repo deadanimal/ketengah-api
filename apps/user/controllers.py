@@ -26,29 +26,29 @@ def senarai_user():
         negeri, email, password)
         db.session.add(user)
         db.session.commit()   
-        return "OK", 201
-    else:
-        list_ = []
-        senarai_user = User.query.all()
-        for user in senarai_user:
-            satu_user = {
-                'name': user.name,
-                'no_ic': user.no_ic,
-                'no_telefon': user.no_telefon,
-                'alamat': user.alamat,
-                'poskod': user.poskod,
-                'bandar': user.bandar,
-                'negeri': user.negeri,
-                'email': user.email,
-                'password': user.password
-            }
-            list_.append(satu_user)
-        return jsonify(data)
+
+    list_ = []
+    senarai_user = User.query.all()
+    for user in senarai_user:
+        satu_user = {
+            'name': user.name,
+            'no_ic': user.no_ic,
+            'no_telefon': user.no_telefon,
+            'alamat': user.alamat,
+            'poskod': user.poskod,
+            'bandar': user.bandar,
+            'negeri': user.negeri,
+            'email': user.email,
+            'password': user.password
+        }
+        list_.append(satu_user)
+    return jsonify(data)
 
 @user_bp.route('/<int:id>', methods=['GET', 'PUT'])
 def satu_user(id):
-    if request.method == 'PUT':
-        user = User.query.get(id)
+    user = User.query.get(id)
+
+    if request.method == 'PUT':        
         request_data = request.get_json()
         user.name = request_data['name']
         user.no_ic = request_data['no_ic']
@@ -60,17 +60,16 @@ def satu_user(id):
         user.email = request_data['email']
         user.password = request_data['password']  
         db.session.commit()                         
-    else:
-        user = User.query.filter_by(id=id).first()
-        satu_user = {
-            'name': user.name,
-            'no_ic': user.no_ic,
-            'no_telefon': user.no_telefon,
-            'alamat': user.alamat,
-            'poskod': user.poskod,
-            'bandar': user.bandar,
-            'negeri': user.negeri,
-            'email': user.email,
-            'password': user.password
-        }        
-        return jsonify(satu_user)      
+
+    satu_user = {
+        'name': user.name,
+        'no_ic': user.no_ic,
+        'no_telefon': user.no_telefon,
+        'alamat': user.alamat,
+        'poskod': user.poskod,
+        'bandar': user.bandar,
+        'negeri': user.negeri,
+        'email': user.email,
+        'password': user.password
+    }       
+    return jsonify(satu_user)      
