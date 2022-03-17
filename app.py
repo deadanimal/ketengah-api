@@ -1,6 +1,6 @@
-from flask import Flask
-app = Flask(__name__)
+# Run a test server.
+from apps import app
+from decouple import config
 
-@app.route('/')
-def hello_world():
-    return 'Hello, World!'
+if __name__ == "__main__":
+    app.run(debug=config('DEBUG'))
