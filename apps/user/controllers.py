@@ -25,7 +25,8 @@ def senarai_user():
         user = User(name, no_ic, no_telefon, alamat, poskod, bandar, 
         negeri, email, password)
         db.session.add(user)
-        db.session.commit()        
+        db.session.commit()   
+        return jsonify(data)     
     else:
         list_ = []
         senarai_user = User.query.all()
