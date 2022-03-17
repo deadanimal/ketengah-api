@@ -42,14 +42,9 @@ def home():
 def not_found(error):
     return "404", 404
 
-# from apps.admin.controllers import admin_bp as admin_module
-# app.register_blueprint(admin_module)    
+from apps.perumahan.controllers import perumahan_bp as perumahan_module
+app.register_blueprint(perumahan_module)    
 
-# from apps.blog.controllers import blog_bp as blog_module
-# app.register_blueprint(blog_module)
-
-# from apps.lotto_4d.controllers import lotto_4d_bp as lotto_4d_module
-# app.register_blueprint(lotto_4d_module)
 
 db.create_all()
 
