@@ -35,7 +35,7 @@ def senarai_admin():
 
 @admin_bp.route('/<int:id>', methods=['GET', 'PUT'])
 def satu_admin(id):
-    admin = Admin.query.get(id)
+    admin = db.session.query(Admin).filter_by(id=id).first()
 
     if request.method == 'PUT':        
         request_data = request.get_json()

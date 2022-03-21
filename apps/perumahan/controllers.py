@@ -62,7 +62,7 @@ def senarai_perumahan():
 @perumahan_bp.route('/<int:id>', methods=['GET', 'PUT'])
 def satu_perumahan(id):
     
-    perumahan = Perumahan.query.get(id)
+    perumahan = db.session.query(Perumahan).filter_by(id=id).first()
 
     if request.method == 'PUT': 
         request_data = request.get_json()

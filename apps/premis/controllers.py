@@ -51,7 +51,7 @@ def senarai_premis():
 @premis_bp.route('/<int:id>', methods=['GET', 'PUT'])
 def satu_premis(id):
     
-    premis = Premis.query.get(id)
+    premis = db.session.query(Premis).filter_by(id=id).first()
 
     if request.method == 'PUT': 
         request_data = request.get_json()
