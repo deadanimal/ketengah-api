@@ -46,7 +46,7 @@ def senarai_user():
 
 @user_bp.route('/<int:id>', methods=['GET', 'PUT'])
 def satu_user(id):
-    user = User.query.get(id)
+    user = db.session.query(User).filter_by(id=id).first()
 
     if request.method == 'PUT':        
         request_data = request.get_json()
